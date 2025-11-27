@@ -8,6 +8,8 @@
     import org.openqa.selenium.WebDriver;
     import org.openqa.selenium.WebElement;
     import org.openqa.selenium.chrome.ChromeDriver;
+    import org.openqa.selenium.support.ui.ExpectedConditions;
+    import org.openqa.selenium.support.ui.WebDriverWait;
 
     import java.time.Duration;
 
@@ -16,11 +18,25 @@
         private MainPage mainPage;
 
         @BeforeEach
-        public void setUp() {
+        public void setUp()  {
             driver = new ChromeDriver();
             driver.manage().window().maximize();
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
             driver.get("https://www.jetbrains.com/");
+
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+
+            try {
+                WebElement acceptCookies = new WebDriverWait(driver, Duration.ofSeconds(5))
+                        .until(ExpectedConditions.elementToBeClickable(
+                                By.cssSelector("button.ch2-allow-all-btn")));
+                acceptCookies.click();
+                System.out.println("Banner fechado com sucesso!");
+            } catch (Exception e) {
+                System.out.println("O banner não apareceu, continuando...");
+            }
+
 
             mainPage = new MainPage(driver);
         }
@@ -31,37 +47,43 @@
         }
 
         @Test
-        public void search() throws InterruptedException{
-            mainPage.searchButton.click();
-            Thread.sleep(1500);
+        public void search() {
 
-            WebElement searchField = driver.findElement(By.cssSelector("[data-test='search-input']"));
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
+            mainPage.searchButton.click();
+
+
+            WebElement searchField = driver.findElement(By.cssSelector("[data-test-id='search-input']"));
             searchField.sendKeys("Selenium");
-            Thread.sleep(1500);
+
 
             WebElement submitButton = driver.findElement(By.cssSelector("button[data-test='full-search-button']"));
             submitButton.click();
-            Thread.sleep(1500);
 
-            WebElement searchPageField = driver.findElement(By.cssSelector("input[data-test='search-input']"));
+
+            WebElement searchPageField = driver.findElement(By.cssSelector("input[data-test-id='search-input']"));
             assertEquals("Selenium", searchPageField.getAttribute("value"));
         }
 
         @Test
-        public void toolsMenu() throws InterruptedException{
+        public void toolsMenu() {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
             mainPage.toolsMenu.click();
-            Thread.sleep(1500);
 
-            WebElement menuPopup = driver.findElement(By.cssSelector("div[data-test='main-submenu']"));
+
+            WebElement menuPopup = driver.findElement(By.cssSelector("div[data-test='main-submenu-suggestion']"));
+
             assertTrue(menuPopup.isDisplayed());
         }
 
         @Test
-        public void navigationToAllTools() throws InterruptedException{
+        public void navigationToAllTools() {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
             mainPage.seeDeveloperToolsButton.click();
-            Thread.sleep(1500);
+
             mainPage.findYourToolsButton.click();
-            Thread.sleep(1500);
+
 
             WebElement productsList = driver.findElement(By.id("products-page"));
             assertTrue(productsList.isDisplayed());
