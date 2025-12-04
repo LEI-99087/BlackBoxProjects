@@ -1,0 +1,3 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","690","testSuite7_DataPresentationAccess()","","2025-12-04","passed","2025-12-04","","SamplerTests.tests.SamplerTest","SamplerTests.tests.SamplerTest","testSuite7_DataPresentationAccess"
+"","3878","testSuite8_BasicFeaturesAccess()","","2025-12-04","passed","2025-12-04","","SamplerTests.tests.SamplerTest","SamplerTests.tests.SamplerTest","testSuite8_BasicFeaturesAccess"
