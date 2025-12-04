@@ -8,6 +8,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
@@ -21,7 +23,16 @@ public class MainPageTest {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get("https://www.jetbrains.com/");
-
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        try {
+            WebElement acceptCookies = new WebDriverWait(driver, Duration.ofSeconds(3))
+                    .until(ExpectedConditions.elementToBeClickable(
+                            By.cssSelector("button.ch2-allow-all-btn")));
+            acceptCookies.click();
+            System.out.println("Banner fechado!");
+        } catch (Exception e) {
+            System.out.println("O banner não apareceu.");
+        }
         mainPage = new MainPage(driver);
     }
 
@@ -32,31 +43,29 @@ public class MainPageTest {
 
     @Test
     public void search() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
         mainPage.searchButton.click();
-
-        WebElement searchField = driver.findElement(By.cssSelector("[data-test='search-input']"));
+        WebElement searchField = driver.findElement(By.cssSelector("[data-test-id='search-input']"));
         searchField.sendKeys("Selenium");
-
         WebElement submitButton = driver.findElement(By.cssSelector("button[data-test='full-search-button']"));
         submitButton.click();
-
-        WebElement searchPageField = driver.findElement(By.cssSelector("input[data-test='search-input']"));
+        WebElement searchPageField = driver.findElement(By.cssSelector("input[data-test-id='search-input']"));
         assertEquals("Selenium", searchPageField.getAttribute("value"));
     }
 
     @Test
     public void toolsMenu() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
         mainPage.toolsMenu.click();
-
-        WebElement menuPopup = driver.findElement(By.cssSelector("div[data-test='main-submenu']"));
+        WebElement menuPopup = driver.findElement(By.cssSelector("div[data-test='main-submenu-suggestion']"));
         assertTrue(menuPopup.isDisplayed());
     }
 
     @Test
     public void navigationToAllTools() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
         mainPage.seeDeveloperToolsButton.click();
         mainPage.findYourToolsButton.click();
-
         WebElement productsList = driver.findElement(By.id("products-page"));
         assertTrue(productsList.isDisplayed());
         assertEquals("All Developer Tools and Products by JetBrains", driver.getTitle());
