@@ -23,11 +23,11 @@ public class AddCategoryTest {
         home.editCategoriesPage();
 
         EditCategoriesPage categoryPage = new EditCategoriesPage();
-        String newCategory = "Thriller";
+        String newCategory = "Biografia";
 
         categoryPage.addCategory(newCategory);
 
 
-        assertEquals("Thriller",categoryPage.getValue());
+        assertEquals("Biografia",categoryPage.getValue());
     }
 }
