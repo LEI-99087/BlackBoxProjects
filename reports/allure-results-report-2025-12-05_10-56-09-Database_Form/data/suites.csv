@@ -1,0 +1,4 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","2532","Deve registar utilizador sem subscrição de marketing","","2025-12-05","passed","2025-12-05","","teste_Form.FormTest","teste_Form.FormTest","testRegistrationStandard"
+"","883","Deve registar utilizador com email e marketing","","2025-12-05","passed","2025-12-05","","teste_Form.FormTest","teste_Form.FormTest","testRegistrationWithMarketing"
+"","2171","testFirstMovieData()","","2025-12-05","passed","2025-12-05","","teste_Database.DatabaseTest","teste_Database.DatabaseTest","testFirstMovieData"
