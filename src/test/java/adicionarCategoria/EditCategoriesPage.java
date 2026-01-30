@@ -28,6 +28,7 @@ public class EditCategoriesPage {
 
     //Adicionar categoria
     //Name é o nome da nova categoria adicionada
+    //comentario teste
     public void addCategory(String name) {
         addCategory.click();
         sleep(100);
