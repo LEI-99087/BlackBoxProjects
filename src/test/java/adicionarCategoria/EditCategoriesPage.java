@@ -26,7 +26,8 @@ public class EditCategoriesPage {
         return $(input);
     }
 
-    // Adiciona uma nova categoria
+    //Adicionar categoria
+    //Name é o nome da nova categoria adicionada
     public void addCategory(String name) {
         addCategory.click();
         sleep(100);
